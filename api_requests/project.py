@@ -1,6 +1,6 @@
 import requests
 
-from AQA_BaseCamp_2021.requests.data import *
+from AQA_BaseCamp_2021.api_requests.data import *
 
 
 class CreateUserRequests():
@@ -33,12 +33,3 @@ class CreateUserRequests():
     def logout_user(self):
         logout_response = requests.request("GET", base_url + "logout", headers=headers, data=payload_delete)
         return logout_response.json(), logout_response.status_code
-
-#
-# sample_response = CreateUserRequests()
-# # print(sample_response.create_users())
-# print(sample_response.get_user())
-# print(sample_response.put_user())
-# print(sample_response.delete_user()[0])
-# print(sample_response.login_user())
-# print(sample_response.logout_user())

@@ -3,12 +3,14 @@ import json
 base_url = "https://petstore.swagger.io/v2/user/"
 # endpoints
 create_users_endpoint = "createWithList"
-logout_endpoint="logout"
+logout_endpoint = "logout"
 
+# header
 headers = {
     'Content-Type': 'application/json'
 }
 
+# users lists
 users_list = [
     {
         "id": 9,
@@ -31,7 +33,6 @@ users_list = [
         "userStatus": 0
     }
 ]
-payload = json.dumps(users_list)
 
 new_users_data = {
     "id": 22,
@@ -44,5 +45,7 @@ new_users_data = {
     "userStatus": 0
 }
 
+# payload
 payload_update = json.dumps(new_users_data)
-payload_delete=""
+payload_delete = ""
+payload = json.dumps(users_list)
