@@ -1,28 +1,29 @@
 import pytest
 
-import project
-from project import *
-import requests
+from AQA_BaseCamp_2021.api_requests.project import *
 
-OK_STATUS_SODE = 200
+OK_STATUS_CODE = 200
 
 
 class TestApi():
+    @pytest.mark.parametrize('code_method',
+                             [('CreateUserRequests().create_users()[1]'), ('CreateUserRequests().get_user()[1]'),
+                              ('CreateUserRequests().put_user()[1]'), ('CreateUserRequests().delete_user()[1]'),
+                              ('CreateUserRequests().login_user()[1]'), ('CreateUserRequests().logout_user()[1]')])
+    def test_status_code(self, code_method):
+        assert eval(code_method) == OK_STATUS_CODE
 
-    def test_get_status_code(self):
-        assert sample_response.get()[1] == OK_STATUS_SODE, "Code doesn't match"
+    def test_create_user(self):
+        assert CreateUserRequests().create_users()[0] == "ok", "User's can't be added"
 
-    def test_get_response(self):
-        assert "true" in sample_response.get()[0]
+    def test_update_user(self):
+        assert CreateUserRequests().put_user()[0]["message"] == str(new_users_data["id"])
 
-    def test_post_status_code(self):
-        assert sample_response.post()[1] == OK_STATUS_SODE, "Code doesn't match"
+    def test_delete_usre(self):
+        assert CreateUserRequests().delete_user()[0] == users_list[1]["username"]
 
-    def test_post_response(self):
-        assert "505" in sample_response.post()[0]
+    def test_login_user(self):
+        assert "logged in" in CreateUserRequests().login_user()[0]["message"]
 
-    def test_put_status_code(self):
-        assert sample_response.put()[1] == OK_STATUS_SODE, "Code doesn't match"
-
-    def test_put_response(self):
-        assert "postman-echo.com" in sample_response.put()[0]
+    def test_logout_user(self):
+        assert CreateUserRequests().logout_user()[0]["message"] == "ok"
